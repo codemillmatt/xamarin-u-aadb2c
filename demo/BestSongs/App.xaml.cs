@@ -18,8 +18,11 @@ namespace BestSongs
             overallTab.Children.Add(new NavigationPage(new NoAuthPage()) { Title = "No Auth" });
             overallTab.Children.Add(new NavigationPage(new LoginPage()) { Title = "Login" });
 
-            MainPage = overallTab;
+            AuthClient = new PublicClientApplication(B2CConstants.ClientId);//, B2CConstants.SignUpInAuthority);
+            AuthClient.ValidateAuthority = false;
+            AuthClient.RedirectUri = B2CConstants.RedirectUrl;
 
+            MainPage = overallTab;
         }
 
         protected override void OnStart()

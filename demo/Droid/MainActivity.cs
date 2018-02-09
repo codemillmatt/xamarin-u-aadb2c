@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.Identity.Client;
 
 namespace BestSongs.Droid
 {
@@ -23,6 +24,8 @@ namespace BestSongs.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+
+            App.UiParent = new UIParent(this);
         }
     }
 }

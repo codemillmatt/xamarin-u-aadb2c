@@ -8,26 +8,37 @@ namespace BestSongs
         public static PublicClientApplication AuthClient = null;
         public static UIParent UiParent = null;
 
+        public static SecuredPage Secured;
+
         public App()
         {
             InitializeComponent();
 
+            //SecuredNavigationPage = new NavigationPage { Title = "Secured" };
+
             TabbedPage overallTab;
             overallTab = new TabbedPage();
 
-            overallTab.Children.Add(new NavigationPage(new NoAuthPage()) { Title = "No Auth" });
-            overallTab.Children.Add(new NavigationPage(new LoginPage()) { Title = "Login" });
+            Secured = new SecuredPage();
 
-            AuthClient = new PublicClientApplication(B2CConstants.ClientId);//, B2CConstants.SignUpInAuthority);
-            AuthClient.ValidateAuthority = false;
-            AuthClient.RedirectUri = B2CConstants.RedirectUrl;
+            overallTab.Children.Add(new NavigationPage(new NoAuthPage()) { Title = "No Auth" });
+            overallTab.Children.Add(new NavigationPage(Secured) { Title = "Secured" });
 
             MainPage = overallTab;
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
             // Handle when your app starts
+            var isLoggedIn = await AuthenticationService.IsLoggedIn();
+
+
+            if (isLoggedIn)
+                Secured.Content = new AuthRequiredView();
+            else
+                Secured.Content = new LoginView();
+
+            Secured.Title = isLoggedIn ? "Logged In" : "Not Logged In";
         }
 
         protected override void OnSleep()

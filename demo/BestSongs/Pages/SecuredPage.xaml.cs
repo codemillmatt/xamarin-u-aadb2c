@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace BestSongs
 {
-    public partial class AuthRequiredPage : ContentPage
+    public partial class SecuredPage : ContentPage
     {
-        public AuthRequiredPage()
+        public SecuredPage()
         {
             InitializeComponent();
         }

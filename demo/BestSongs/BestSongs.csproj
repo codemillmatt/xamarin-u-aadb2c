@@ -33,11 +33,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\LoginPage.xaml">
+    <EmbeddedResource Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AuthRequiredPage.xaml">
+    <EmbeddedResource Include="Views\AuthRequiredView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SecuredPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -50,17 +54,23 @@
     <Compile Include="Pages\NoAuthPage.xaml.cs">
       <DependentUpon>NoAuthPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AuthRequiredPage.xaml.cs">
-      <DependentUpon>AuthRequiredPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Constants\B2CConstants.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuthRequiredView.xaml.cs">
+      <DependentUpon>AuthRequiredView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SecuredPage.xaml.cs">
+      <DependentUpon>SecuredPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Constants\" />
+    <Folder Include="Services\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

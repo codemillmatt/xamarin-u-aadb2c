@@ -30,15 +30,18 @@ namespace BestSongs
         protected async override void OnStart()
         {
             // Handle when your app starts
-            var isLoggedIn = await AuthenticationService.IsLoggedIn();
+            var userInfo = await AuthenticationService.GetCachedSignInToken();
 
-
-            if (isLoggedIn)
-                Secured.Content = new AuthRequiredView();
+            if (userInfo != null)
+            {
+                Secured.Title = "Logged In";
+                Secured.Content = new AuthRequiredView(userInfo);
+            }
             else
+            {
+                Secured.Title = "Not Logged In";
                 Secured.Content = new LoginView();
-
-            Secured.Title = isLoggedIn ? "Logged In" : "Not Logged In";
+            }
         }
 
         protected override void OnSleep()

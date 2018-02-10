@@ -13,12 +13,13 @@ namespace BestSongs
 
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            var token = await AuthenticationService.GetSignInUpToken();
+            var userInfo = await AuthenticationService.GetSignInUpToken();
 
-            if (!string.IsNullOrWhiteSpace(token))
+            if (userInfo != null)
             {
-                var authReqView = new AuthRequiredView();
+                var authReqView = new AuthRequiredView(userInfo);
                 App.Secured.Content = authReqView;
+                App.Secured.Title = "Logged In";
                 return;
             }
 

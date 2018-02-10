@@ -65,12 +65,15 @@
     <Compile Include="Pages\SecuredPage.xaml.cs">
       <DependentUpon>SecuredPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Services\BestSongService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Constants\" />
     <Folder Include="Services\" />
     <Folder Include="Views\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -87,6 +90,9 @@
     </Reference>
     <Reference Include="Microsoft.Identity.Client">
       <HintPath>..\packages\Microsoft.Identity.Client.1.1.3-alpha0001\lib\netstandard1.1\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

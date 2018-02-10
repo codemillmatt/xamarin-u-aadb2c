@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Diagnostics;
 
 using Microsoft.Identity.Client;
-using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace BestSongs
 {
@@ -23,16 +24,16 @@ namespace BestSongs
             AuthClient.RedirectUri = B2CConstants.MSALRedirectUri;
         }
 
-        public async static Task<string> GetSignInUpToken()
+        public async static Task<UserInfo> GetSignInUpToken()
         {
             Init();
 
-            string token = default(string);
+            UserInfo returnUser = null;
 
-            //token = await GetCachedSignInToken();
+            returnUser = await GetCachedSignInToken();
 
-            if (!string.IsNullOrWhiteSpace(token))
-                return token;
+            if (returnUser != null)
+                return returnUser;
 
             try
             {
@@ -45,14 +46,21 @@ namespace BestSongs
                     App.UiParent
                 );
 
-                token = result.AccessToken;
+                var parsedUserInfo = ParseIdToken(result.IdToken);
+
+                returnUser = new UserInfo
+                {
+                    AccessToken = result.AccessToken,
+                    City = parsedUserInfo["city"]?.ToString(),
+                    DisplayName = parsedUserInfo["name"]?.ToString()
+                };
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"*** ERROR: {ex.Message}");
             }
 
-            return token;
+            return returnUser;
         }
 
         public async static Task<bool> IsLoggedIn()
@@ -61,10 +69,10 @@ namespace BestSongs
 
             var cachedToken = await GetCachedSignInToken();
 
-            return !string.IsNullOrWhiteSpace(cachedToken);
+            return !string.IsNullOrWhiteSpace(cachedToken?.AccessToken);
         }
 
-        public async static Task<string> GetCachedSignInToken()
+        public async static Task<UserInfo> GetCachedSignInToken()
         {
             Init();
 
@@ -78,7 +86,14 @@ namespace BestSongs
                     false
                 );
 
-                return result.AccessToken;
+                var userInfo = ParseIdToken(result.IdToken);
+
+                return new UserInfo
+                {
+                    AccessToken = result.AccessToken,
+                    DisplayName = userInfo["displayName"]?.ToString(),
+                    City = userInfo["city"]?.ToString()
+                };
             }
             catch (MsalUiRequiredException ex)
             {
@@ -118,6 +133,14 @@ namespace BestSongs
             var byteArray = Convert.FromBase64String(s);
             var decoded = Encoding.UTF8.GetString(byteArray, 0, byteArray.Count());
             return decoded;
+        }
+
+        static JObject ParseIdToken(string idToken)
+        {
+            // Get the piece with actual user info
+            idToken = idToken.Split('.')[1];
+            idToken = Base64UrlDecode(idToken);
+            return JObject.Parse(idToken);
         }
 
     }

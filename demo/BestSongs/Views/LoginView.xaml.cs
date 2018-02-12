@@ -13,7 +13,8 @@ namespace BestSongs
 
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            var userInfo = await AuthenticationService.GetSignInUpToken();
+            UserInfo userInfo = null;
+            userInfo = await AuthenticationService.GetSignInUpToken();
 
             if (userInfo != null)
             {

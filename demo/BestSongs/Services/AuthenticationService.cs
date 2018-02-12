@@ -91,7 +91,7 @@ namespace BestSongs
                 return new UserInfo
                 {
                     AccessToken = result.AccessToken,
-                    DisplayName = userInfo["displayName"]?.ToString(),
+                    DisplayName = userInfo["name"]?.ToString(),
                     City = userInfo["city"]?.ToString()
                 };
             }

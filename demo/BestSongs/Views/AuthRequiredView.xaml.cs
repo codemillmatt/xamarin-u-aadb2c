@@ -20,5 +20,14 @@ namespace BestSongs
 
             songList.ItemsSource = bestSongs;
         }
+
+        void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            AuthenticationService.Logout();
+
+            var login = new LoginView();
+            App.Secured.Content = login;
+            App.Secured.Title = "Not Logged In";
+        }
     }
 }

@@ -25,7 +25,14 @@ namespace BestSongs.Droid
 
             LoadApplication(new App());
 
-            App.UiParent = new UIParent(this);
+            App.UiParent = new UIParent(this as Activity);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace BestSongs
 {
@@ -22,7 +23,7 @@ namespace BestSongs
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Get, apiUrl))
                 {
-                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authToken);
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
                     using (var response = await client.SendAsync(request).ConfigureAwait(false))
                     {

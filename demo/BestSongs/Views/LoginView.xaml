@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BestSongs.LoginView">
     <ContentView.Content>
-        <Button Text="Login" VerticalOptions="Center" HorizontalOptions="Center" Clicked="Handle_Clicked" />
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                   Source="BitFacepalm" />
+            
+            <Label Margin="0,20" 
+                   Text="You have to log in to see the best songs ever!" 
+                   Grid.Row="1"  
+                   HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                    />
+
+            <Button Grid.Row="2" BackgroundColor="#722424" TextColor="White" BorderRadius="15"
+                Text="Login" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Clicked="Handle_Clicked" />
+        </Grid>
     </ContentView.Content>
 </ContentView>

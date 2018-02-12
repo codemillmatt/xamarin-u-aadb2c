@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BestSongs.AuthRequiredView">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="{Binding DisplayName, StringFormat='Hello {0}!'}" />
-            <Label Text="{Binding City, StringFormat='The top songs in {0} are:'}" />
-            <ListView x:Name="songList">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Margin="10" Grid.Row="0" >
+                <Image Aspect="AspectFit" Source="BitDevAdvocate" />
+                <Label Text="{Binding DisplayName, StringFormat='Hello {0}!'}" 
+                       VerticalOptions="FillAndExpand" 
+                       HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
+            <Label Grid.Row="1" Text="{Binding City, StringFormat='The top songs in {0} are:'}" 
+                   Margin="10" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+            
+            <ListView Grid.Row="2" x:Name="songList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding SongName}" Detail="{Binding ArtistName}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>

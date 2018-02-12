@@ -4,6 +4,18 @@
              x:Class="BestSongs.NoAuthPage"
              Title="No Auth">
     <ContentPage.Content>
-        <Label Text="No auth required" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*" />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="BitMicrosoft.png"
+                   Aspect="AspectFit"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand" />
+
+            <Label Grid.Row="1" Text="You're not required to login here" HorizontalOptions="Center" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

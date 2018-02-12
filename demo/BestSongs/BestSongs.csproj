@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Services\BestSongService.cs" />
+    <Compile Include="Models\SongInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />

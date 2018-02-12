@@ -14,8 +14,6 @@ namespace BestSongs
         {
             InitializeComponent();
 
-            //SecuredNavigationPage = new NavigationPage { Title = "Secured" };
-
             TabbedPage overallTab;
             overallTab = new TabbedPage();
 
@@ -35,7 +33,9 @@ namespace BestSongs
             if (userInfo != null)
             {
                 Secured.Title = "Logged In";
-                Secured.Content = new AuthRequiredView(userInfo);
+                var authView = new AuthRequiredView();
+                await authView.InitializeDisplay(userInfo);
+                Secured.Content = authView;
             }
             else
             {

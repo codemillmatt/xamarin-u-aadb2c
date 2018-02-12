@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BestSongs.AuthRequiredView">
     <ContentView.Content>
-        <Label Text="{Binding DisplayName}" />
+        <StackLayout>
+            <Label Text="{Binding DisplayName, StringFormat='Hello {0}!'}" />
+            <Label Text="{Binding City, StringFormat='The top songs in {0} are:'}" />
+            <ListView x:Name="songList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding SongName}" Detail="{Binding ArtistName}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

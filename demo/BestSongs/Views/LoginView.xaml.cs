@@ -17,7 +17,8 @@ namespace BestSongs
 
             if (userInfo != null)
             {
-                var authReqView = new AuthRequiredView(userInfo);
+                var authReqView = new AuthRequiredView();
+                await authReqView.InitializeDisplay(userInfo);
                 App.Secured.Content = authReqView;
                 App.Secured.Title = "Logged In";
                 return;

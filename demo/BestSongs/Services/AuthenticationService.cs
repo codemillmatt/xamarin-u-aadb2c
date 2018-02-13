@@ -37,23 +37,8 @@ namespace BestSongs
 
             try
             {
-                var result = await AuthClient.AcquireTokenAsync(
-                    B2CConstants.ApplicationScopes,
-                    GetUserByPolicy(AuthClient.Users, B2CConstants.SignInUpPolicy),
-                    UIBehavior.ForceLogin,
-                    null, null,
-                    B2CConstants.SignInUpAuthority,
-                    App.UiParent
-                );
+                // Get token from B2C
 
-                var parsedUserInfo = ParseIdToken(result.IdToken);
-
-                returnUser = new UserInfo
-                {
-                    AccessToken = result.AccessToken,
-                    City = parsedUserInfo["city"]?.ToString(),
-                    DisplayName = parsedUserInfo["name"]?.ToString()
-                };
             }
             catch (Exception ex)
             {
@@ -76,24 +61,14 @@ namespace BestSongs
         {
             Init();
 
+            UserInfo userInfo = null;
+
             try
             {
                 // This checks to see if there's already a user in the cache
-                var result = await AuthClient.AcquireTokenSilentAsync(
-                    B2CConstants.ApplicationScopes,
-                    GetUserByPolicy(AuthClient.Users, B2CConstants.SignInUpPolicy),
-                    B2CConstants.SignInUpAuthority,
-                    false
-                );
 
-                var userInfo = ParseIdToken(result.IdToken);
 
-                return new UserInfo
-                {
-                    AccessToken = result.AccessToken,
-                    DisplayName = userInfo["name"]?.ToString(),
-                    City = userInfo["city"]?.ToString()
-                };
+
             }
             catch (MsalUiRequiredException ex)
             {
@@ -101,7 +76,7 @@ namespace BestSongs
                 Debug.WriteLine($"*** ERROR: {ex.Message}");
             }
 
-            return null;
+            return userInfo;
         }
 
         public static void Logout()

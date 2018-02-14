@@ -3,6 +3,8 @@ namespace BestSongs
 {
     public class B2CConstants
     {
+        #error Setup the tenant and grab the various ID - scopes - and policy names
+            
         public static readonly string Tenant = "-- YOUR TENANT NAME HERE --";
         public static readonly string ClientId = "-- YOUR CLIENT ID HERE --";
 
@@ -16,5 +18,7 @@ namespace BestSongs
         public static readonly string EditProfileAuthority = $"{AuthorityBase}{EditProfilePolicy}";
 
         public static string[] Scopes = new string[] { "" };
+        
+        public static string BestSongsUrl = "";
     }
 }
